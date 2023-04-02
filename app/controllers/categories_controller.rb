@@ -5,6 +5,7 @@ class CategoriesController < ApplicationController
 
   def show
     @category = Category.find_by(id: params[:id])
+    @current_products = Product.where(subcategory_id: Category.find_by(id: params[:id]).subcategories.ids)
   end
 
   def new

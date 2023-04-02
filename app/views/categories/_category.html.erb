@@ -1,1 +1,9 @@
 <%= category.title %>
+</br>
+<p>______________________________</p>
+<% @category.subcategories.each do |subcategory| %>
+  <%= link_to subcategory.title, subcategory_path(subcategory) %>
+<% end %>
+<p>______________________________</p>
+</br>
+<%= render @current_products %>
