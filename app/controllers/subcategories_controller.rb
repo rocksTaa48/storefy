@@ -9,6 +9,7 @@ class SubcategoriesController < ApplicationController
 
   def new
     @subcategory = Subcategory.new
+    @categories = Category.order(created_at: :desc)
   end
 
   def edit
@@ -39,6 +40,6 @@ class SubcategoriesController < ApplicationController
 
   private
   def subcategory_params
-    params.require(:subcategory).permit(:title, :body)
+    params.require(:subcategory).permit(:title, :body, :category_id)
   end
 end

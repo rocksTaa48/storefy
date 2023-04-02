@@ -9,6 +9,8 @@ class ProductsController < ApplicationController
 
   def new
     @product = Product.new
+    @categories = Category.order(created_at: :desc)
+    @subcategories = Subcategory.order(created_at: :desc)
   end
 
   def edit
@@ -19,7 +21,7 @@ class ProductsController < ApplicationController
     @product = Product.create product_params
     if @product.save
       flash[:success] = "Object successfully created"
-      redirect_to @subcategory
+      redirect_to @product
     else
       flash[:error] = "Something went wrong"
       render 'new'
@@ -39,6 +41,6 @@ class ProductsController < ApplicationController
 
   private
   def product_params
-    params.require(:product).permit(:title, :body, :quantity, :price, )
+    params.require(:product).permit(:title, :body, :quantity, :price, :subcategory_id)
   end
 end
