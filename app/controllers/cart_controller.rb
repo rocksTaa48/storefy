@@ -1,10 +1,13 @@
 class CartController < ApplicationController
 
+
   def show
     @product = Product.find_by(id: params[:id])
     @orders = Order.find_by(id: params[:id])
     @render_cart = false
+    redirect_to root_path unless current_user.id.to_s == params[:user_id]
   end
+
   # add item to cart -->
   def add
     @product = Product.find_by(id: params[:id])
@@ -12,7 +15,7 @@ class CartController < ApplicationController
     @cart = current_cart
     current_order = @cart.orders.find_by(product_id: @product.id)
     if current_order && quantity > 0
-      current_order.update(:quantity)
+      current_order.update(quantity:)
     elsif quantity <= 0
       current_order.destroy
     else

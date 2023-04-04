@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
 
   devise_for :users, controllers: {
-    sessions: 'users/sessions'
+    sessions: 'users/sessions',
+    registrations: 'users/registrations',
+    passwords: 'users/passwords',
   }
 
   root "pages#index"
@@ -9,7 +11,10 @@ Rails.application.routes.draw do
   resources :subcategories
   resources :products
 
-  get 'cart', to: 'cart#show'
+  resources :users, only: %i[show], param: :id do
+    resource :cart, controller: 'cart', only: %i[show]
+  end
+
   post 'cart/add'
   post 'cart/remove'
 
