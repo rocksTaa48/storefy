@@ -1,10 +1,11 @@
 class SubcategoriesController < ApplicationController
+
   def index
     @subcategories = Subcategory.order(created_at: :desc)
   end
 
   def show
-    @subcategory = Subcategory.find_by(id: params[:id])
+    @subcategory = Subcategory.find_by(title: params[:id])
   end
 
   def new

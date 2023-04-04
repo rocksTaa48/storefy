@@ -6,6 +6,10 @@ class User < ApplicationRecord
 
   has_one :cart, dependent: :destroy
 
+  def to_param
+    self.name.parameterize
+  end
+
   def current_cart
     if self.cart.nil?
       self.create_cart(user_id: self.id)

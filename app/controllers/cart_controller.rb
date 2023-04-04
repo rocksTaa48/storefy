@@ -5,7 +5,7 @@ class CartController < ApplicationController
     @product = Product.find_by(id: params[:id])
     @orders = Order.find_by(id: params[:id])
     @render_cart = false
-    redirect_to root_path unless current_user.id.to_s == params[:user_id]
+    redirect_to root_path unless current_user.name.parameterize == params[:user_id]
   end
 
   # add item to cart -->
