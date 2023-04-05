@@ -1,5 +1,17 @@
 <% navigation_at %>
-<% @categories.each do |category| %>
-  <%= link_to category.title, category_path(category) %>
-  </br>
-<% end %>
+<div class="p-20 bg-orange-200">
+  <h3 class="text-orange-400 font-bold mb-4">3. Horizontal &amp; Responsive Card</h3>
+  <div class="bg-white rounded-lg shadow-2xl md:flex">
+    <img src="https://images.unsplash.com/photo-1593642532744-d377ab507dc8" alt="Laptop on Desk" class="md:w-1/3 rounded-t-lg md:rounded-l-lg md:rounded-t-none" />
+    <div class="p-6">
+      <h2 class="font-bold text-xl md:text-3xl mb-2 text-orange-700">Horizontal Card</h2>
+      <p class="text-orange-700">
+  <% @categories.each do |category| %>
+    <%= link_to category.title, category_path(category) %>
+    </br>
+  <% end %>
+      </p>
+    </div>
+
+  </div>
+</div>

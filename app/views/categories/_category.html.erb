@@ -3,7 +3,7 @@
 </br>
 <p>______________________________</p>
 <% @category.subcategories.each do |subcategory| %>
-  <%= link_to subcategory.title, subcategory_path(subcategory) %>
+  <%= link_to subcategory.title, subcategory_path(subcategory), data: { turbo: false } %>
 <% end %>
 <p>______________________________</p>
 </br>

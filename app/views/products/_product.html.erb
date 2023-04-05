@@ -1,12 +1,7 @@
-<%= product.title %>
-</br>
-<%= product.body %>
-</br>
-<%= product.quantity %>
+<%= link_to product.title, product_path(product), data:{turbo: false} %>
 </br>
 <%= product.price %>
 </br>
-<%= product.subcategory.title %>
 <p>________________</p>
 <%= form_with(url: cart_add_path) do |f| %>
   <%= f.hidden_field :id, value: product.id %>
