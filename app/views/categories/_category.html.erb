@@ -1,3 +1,4 @@
+<%= turbo_frame_tag category do %>
 <%= category.title %>
 </br>
 <p>______________________________</p>
@@ -7,3 +8,4 @@
 <p>______________________________</p>
 </br>
 <%= render @category.products %>
+<% end %>
