@@ -20,6 +20,7 @@
         <% end %>
         <strong>Total:</strong>
         <%= order.total %>
+        <%= check_box_tag "order_ids[]", order.id, nil, { multiple: true, form: :checked_form } %>
       </div>
     </div>
   <% end %>
