@@ -19,7 +19,7 @@ end
     )
 end
 
-(1..50).each do |id|
+(1..30).each do |id|
   Subcategory.create!(
     id: id,
     title: Faker::Commerce.brand,
@@ -28,13 +28,13 @@ end
     )
 end
 
-(1..500).each do |id|
+(1..100).each do |id|
   Product.create!(
     id: id,
     body: Faker::Lorem.sentence(word_count: 30),
     title: Faker::Commerce.product_name,
     price: Faker::Commerce.price(range: 35..400),
     quantity: Faker::Commerce.price(range: 2..100),
-    subcategory_id: Subcategory.find(rand(1..50)).id,
+    subcategory_id: Subcategory.find(rand(1..30)).id,
     )
 end

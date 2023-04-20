@@ -27,6 +27,10 @@ gem "devise"
 
 gem "faker"
 
+gem "aasm"
+
+gem "after_commit_everywhere"
+
 # gem "redis", "~> 4.0"
 
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]

@@ -5,7 +5,7 @@ class SubcategoriesController < ApplicationController
   end
 
   def show
-    @subcategory = Subcategory.find_by(title: params[:id])
+    @subcategory = Subcategory.find_by(id: params[:id])
   end
 
   def new

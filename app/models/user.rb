@@ -4,17 +4,11 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  has_one :cart, dependent: :destroy
+  has_many :orders
+  has_many :products, through: :orders
 
   def to_param
     self.name.parameterize
-  end
-
-  def current_cart
-    if self.cart.nil?
-      self.create_cart(user_id: self.id)
-    end
-    self.cart
   end
 
 end

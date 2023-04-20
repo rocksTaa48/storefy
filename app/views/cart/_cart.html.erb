@@ -1,6 +1,5 @@
 <%= turbo_frame_tag "cart" do %>
-  <!-- <h1>Cart</h1> -->
-  <% if current_user.current_cart.orders.count > 0 %>
+  <% if current_user.orders.in_cart.count > 0 %>
     <%= render "cart/orders" %>
   <% else %>
     <p>Your cart is empty</p>
