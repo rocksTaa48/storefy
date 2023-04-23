@@ -12,6 +12,14 @@ require 'faker'
     )
 end
 
+(1..5).each do |id|
+  Store.create!(
+    id: id,
+    title: Faker::Company.name,
+    user_id: User.find(rand(1..5)).id
+  )
+end
+
 (1..10).each do |id|
   Category.create!(
     id: id,
@@ -31,6 +39,7 @@ end
 (1..100).each do |id|
   Product.create!(
     id: id,
+    store_id: Store.find(rand(1..5)).id,
     body: Faker::Lorem.sentence(word_count: 30),
     title: Faker::Commerce.product_name,
     price: Faker::Commerce.price(range: 35..400),

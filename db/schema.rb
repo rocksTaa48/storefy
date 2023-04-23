@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_02_193256) do
+ActiveRecord::Schema[7.0].define(version: 2023_04_23_133916) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -35,12 +35,39 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_02_193256) do
   create_table "products", force: :cascade do |t|
     t.string "title", null: false
     t.text "body", default: ""
-    t.decimal "price", precision: 10, scale: 3, default: "0.0", null: false
+    t.decimal "price", precision: 8, scale: 2, default: "0.0", null: false
     t.integer "quantity", default: 1, null: false
     t.bigint "subcategory_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "store_id"
+    t.index ["store_id"], name: "index_products_on_store_id"
     t.index ["subcategory_id"], name: "index_products_on_subcategory_id"
+  end
+
+  create_table "reviews", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "product_id", null: false
+    t.string "title"
+    t.string "rating"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["product_id"], name: "index_reviews_on_product_id"
+    t.index ["rating"], name: "index_reviews_on_rating"
+    t.index ["user_id"], name: "index_reviews_on_user_id"
+  end
+
+  create_table "stores", force: :cascade do |t|
+    t.string "title", null: false
+    t.string "body", default: "", null: false
+    t.bigint "user_id", null: false
+    t.string "email"
+    t.string "phone"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["email"], name: "index_stores_on_email"
+    t.index ["phone"], name: "index_stores_on_phone"
+    t.index ["user_id"], name: "index_stores_on_user_id"
   end
 
   create_table "subcategories", force: :cascade do |t|
@@ -71,6 +98,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_02_193256) do
 
   add_foreign_key "orders", "products"
   add_foreign_key "orders", "users"
+  add_foreign_key "products", "stores"
   add_foreign_key "products", "subcategories"
+  add_foreign_key "reviews", "products"
+  add_foreign_key "reviews", "users"
+  add_foreign_key "stores", "users"
   add_foreign_key "subcategories", "categories"
 end

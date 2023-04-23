@@ -6,6 +6,8 @@ class User < ApplicationRecord
 
   has_many :orders
   has_many :products, through: :orders
+  has_many :reviews
+  has_one :store
 
   def to_param
     self.name.parameterize

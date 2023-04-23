@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   resources :categories
   resources :subcategories
   resources :products
+  resources :stores
 
   resources :users, only: %i[show], param: :id do
     resource :cart, controller: 'cart', only: %i[show]
