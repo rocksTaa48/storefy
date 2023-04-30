@@ -22,7 +22,7 @@ class StoresController < ApplicationController
     @store = @user.stores.create store_params
     if @store.save
       flash[:success] = "Object successfully created"
-      redirect_to user_path
+      redirect_to current_user
     else
       flash[:error] = "Something went wrong"
       render 'new'

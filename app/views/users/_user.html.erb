@@ -6,6 +6,29 @@
 <br/>
 <%= link_to "Create Store", new_store_path, class:"px-2 py-1 rounded-xl bg-green-400 hover:bg-green-600" %>
 <br/>
+<p class="font-extrabold text-2xl mt-4"> My Stores list </p>
+<br/>
+<div class="flex flex-row justify-items-start">
 <% @stores.each do |store| %>
-  <%= link_to store.title, store_path(store), class:"px-2 py-1 rounded-xl bg-green-400 hover:bg-green-600" %>
+    <div x-data="{open : false}" class="flex flex-col px-2 py-2 space-y-1 text-slate-800">
+      <div class="mt-1 w-40">
+        <button @click="open = true" class="flex items-center rounded bg-white shadow space-x-1 px-3 py-2">
+          <%= store.title %>>
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-slate-600" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 0 1 1.414 0L10 10.586l3.293-3.293a1 1 0 1 1 1.414 1.414l-4 4a1 1 0 0 1-1.414 0l-4-4a1 1 0 0 1 0-1.414z" clip-rule="evenodd"></path></svg>
+        </button>
+      </div>
+      <!--Options-->
+      <div x-show="open === true" x-transition="" @click.outside="open = false" class="flex flex-col text-sm w-40 left-0 mt-2 bg-white rounded-sm shadow-md overflow-hidden" style="display: none;">
+        <div>
+          <%= link_to "Show products", store_path(store), class:"w-full block hover:bg-slate-200 p-2" %>
+          <%= link_to "Edit store", edit_store_path(store), class:"w-full block hover:bg-slate-200 p-2" %>
+        </div>
+        <div class="border-t border-slate-400">
+          <%= link_to "New Product", new_product_path(:store_id => store.id), class:"w-full block hover:bg-slate-200 p-2" %>
+          <a class="w-full block hover:bg-slate-200 p-2" href="#">Delete Tasks</a>
+        </div>
+      </div>
+      <!--Options-->
+    </div>
 <% end %>
+</div>
