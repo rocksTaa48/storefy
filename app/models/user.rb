@@ -7,8 +7,7 @@ class User < ApplicationRecord
   has_many :orders
   has_many :products, through: :orders
   has_many :reviews
-  has_many :stores, dependent: :destroy
-  has_many :products, through: :stores
+  has_one :store
 
   def to_param
     self.name.parameterize
