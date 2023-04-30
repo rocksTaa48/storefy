@@ -1,18 +1,17 @@
 <%= form_with model: @product do |f| %>
   <%= f.label :title %>
   <%= f.text_field :title %>
-  <br/>
+  </br>
   <%= f.label :body %>
   <%= f.text_field :body %>
-  <br/>
+  </br>
   <%= f.label :price %>
   <%= f.number_field :price %>
-  <br/>
+  </br>
   <%= f.label :quantity %>
   <%= f.number_field :quantity %>
-  <br/>
+  </br>
   <%= f.grouped_collection_select :subcategory_id, @categories, :subcategories, :title, :id, :title %>
-  <br/>
+  </br>
   <%= f.submit "SAVE" %>
-  <%= f.hidden_field :store_id, value: params[:store_id] %>
 <% end %>
