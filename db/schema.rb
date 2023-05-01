@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_23_133916) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_01_075300) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -40,9 +40,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_23_133916) do
     t.bigint "subcategory_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "store_id"
-    t.index ["store_id"], name: "index_products_on_store_id"
+    t.bigint "user_id", null: false
     t.index ["subcategory_id"], name: "index_products_on_subcategory_id"
+    t.index ["user_id"], name: "index_products_on_user_id"
   end
 
   create_table "reviews", force: :cascade do |t|
@@ -55,19 +55,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_23_133916) do
     t.index ["product_id"], name: "index_reviews_on_product_id"
     t.index ["rating"], name: "index_reviews_on_rating"
     t.index ["user_id"], name: "index_reviews_on_user_id"
-  end
-
-  create_table "stores", force: :cascade do |t|
-    t.string "title", null: false
-    t.string "body", default: "", null: false
-    t.bigint "user_id", null: false
-    t.string "email"
-    t.string "phone"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["email"], name: "index_stores_on_email"
-    t.index ["phone"], name: "index_stores_on_phone"
-    t.index ["user_id"], name: "index_stores_on_user_id"
   end
 
   create_table "subcategories", force: :cascade do |t|
@@ -84,7 +71,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_23_133916) do
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "phone", default: "", null: false
-    t.boolean "admin", default: false, null: false
+    t.string "status", null: false
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
@@ -94,14 +81,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_23_133916) do
     t.index ["name"], name: "index_users_on_name", unique: true
     t.index ["phone"], name: "index_users_on_phone", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["status"], name: "index_users_on_status"
   end
 
   add_foreign_key "orders", "products"
   add_foreign_key "orders", "users"
-  add_foreign_key "products", "stores"
   add_foreign_key "products", "subcategories"
+  add_foreign_key "products", "users"
   add_foreign_key "reviews", "products"
   add_foreign_key "reviews", "users"
-  add_foreign_key "stores", "users"
   add_foreign_key "subcategories", "categories"
 end

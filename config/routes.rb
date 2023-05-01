@@ -10,7 +10,6 @@ Rails.application.routes.draw do
   resources :categories
   resources :subcategories
   resources :products
-  resources :stores
 
   resources :users, only: %i[show], param: :id do
     resource :cart, controller: 'cart', only: %i[show]
@@ -18,6 +17,7 @@ Rails.application.routes.draw do
 
   post 'cart/add'
   post 'cart/remove'
+  get 'users/:user_id/products'=> 'products#user_products', as: :user_products
 
   resources :orders, only: %i[destroy] do
     collection do

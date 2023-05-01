@@ -2,3 +2,7 @@
 <%= render current_user %>
 <p>________________</p>
 <%= link_to 'Edit', edit_user_registration_path %>
+<br/>
+<%= link_to 'My products list', user_products_path(@user.id) %>
+<br/>
+<%= link_to "Sale product", new_product_path %>

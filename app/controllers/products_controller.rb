@@ -7,6 +7,15 @@ class ProductsController < ApplicationController
     @product = Product.find_by(id: params[:id])
   end
 
+  def user_products
+    @user = current_user
+    if @user.id == params[:user_id].to_i
+      @products = Product.where(user_id: params[:user_id])
+    else
+      not_found
+    end
+  end
+
   def new
     @product = Product.new
     @categories = Category.order(created_at: :desc)
@@ -18,13 +27,18 @@ class ProductsController < ApplicationController
   end
 
   def create
-    @product = Product.create product_params
-    if @product.save
-      flash[:success] = "Object successfully created"
-      redirect_to @product
+    @user = current_user
+    if @user.status == "seller"
+      @product = @user.products.create product_params
+      if @product.save
+        flash[:success] = "Object successfully created"
+        redirect_to @product
+      else
+        flash[:error] = "Something went wrong"
+        render 'new'
+      end
     else
-      flash[:error] = "Something went wrong"
-      render 'new'
+      flash[:error] = "Need to create seller account"
     end
   end
 
@@ -41,6 +55,6 @@ class ProductsController < ApplicationController
 
   private
   def product_params
-    params.require(:product).permit(:title, :body, :quantity, :price, :subcategory_id)
+    params.require(:product).permit(:title, :body, :quantity, :price, :subcategory_id, :user_id)
   end
 end

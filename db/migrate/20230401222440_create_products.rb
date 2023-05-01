@@ -7,6 +7,7 @@ class CreateProducts < ActiveRecord::Migration[7.0]
       t.integer :quantity, null: false, default: 1
       t.belongs_to :subcategory, null: false, foreign_key: true
 
+
       t.timestamps
     end
   end

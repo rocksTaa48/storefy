@@ -2,7 +2,7 @@ class Order < ApplicationRecord
   belongs_to :product
   belongs_to :user
 
-  STATUSES = %w[in_cart in_purchase in_send in_arrived].freeze
+  STATUSES = %w[in_cart in_purchase in_send].freeze
   STATUSES.each do |s|
     define_method("#{s}?") { status == s }
     define_method("#{s}!") { update! status: s }
