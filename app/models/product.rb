@@ -1,6 +1,16 @@
 class Product < ApplicationRecord
+  belongs_to :user
   belongs_to :subcategory
   has_many :orders
   has_many :reviews
-  belongs_to :user
+
+  validate :content_validation
+
+  private
+
+  def content_validation
+    if title.blank? && body.blank? && price.blank?
+      errors.add :error, "Fields can't be null"
+    end
+  end
 end

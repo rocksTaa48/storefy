@@ -1,8 +1,8 @@
 <% navigation_at %>
 <%= render current_user %>
 <p>________________</p>
-<%= link_to 'Edit', edit_user_registration_path %>
+<%= link_to 'Edit', edit_user_registration_path, class:"hover:text-gray-500" %>
 <br/>
-<%= link_to 'My products list', user_products_path(@user.id) %>
+<%= link_to 'My products list', user_products_path(@user.id), class:"hover:text-gray-500" %>
 <br/>
-<%= link_to "Sale product", new_product_path %>
+<%= link_to "Sale product", new_product_path, class:"hover:text-gray-500" %>
