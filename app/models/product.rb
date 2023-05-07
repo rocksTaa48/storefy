@@ -1,4 +1,5 @@
 class Product < ApplicationRecord
+
   belongs_to :user
   belongs_to :subcategory
   has_many :orders
@@ -6,11 +7,16 @@ class Product < ApplicationRecord
 
   validate :content_validation
 
+  after_save :touch_object
+
   private
 
   def content_validation
-    if title.blank? && body.blank? && price.blank?
-      errors.add :error, "Fields can't be null"
-    end
+    errors.add( :base, "Field cannot be blank") if title.blank? || body.blank? || price.blank? || quantity.blank?
   end
+
+  def touch_object
+    user.touch
+  end
+
 end

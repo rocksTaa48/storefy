@@ -16,7 +16,6 @@ class Order < ApplicationRecord
     self.status = "in_cart"
   end
 
-
   def total
     product.price * quantity
   end
